@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>框架</title>
+
+	<style>
+		#head {
+			border-bottom-style: solid;		
+		}	
+		.tag {
+			display: inline;
+		}
+		.a_custom {
+			text-decoration: none;
+		}
+	</style>
+
+</head>
+<body>
+	<div id="head">
+		<img src="{{ url_for('static', filename='images/logo.jpg') }}" height="100px" width="120px">
+		<cite>Banana Jun may be late, but will never be absent</cite>
+		<ul class="tag">
+			<li class="tag" ><a class="a_custom" id="yunwei" onclick="tag_status_change()">运维(1)</a></li>
+			<li class="tag" id="linx_c"><a class="a_custom" href="">linux c(0)</a></li>
+		</ul>
+	</div>
+	<div>body</div>
+</body>
+</html>
+
+<script>
+	function tag_status_change(event){
+		console.log(111);
+		console.log(this.id);
+	}
+</script>
