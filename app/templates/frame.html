@@ -8,7 +8,7 @@
 		#head {
 			border-bottom-style: solid;		
 		}	
-		.tag {
+		.inline_element {
 			display: inline;
 		}
 		.a_custom {
@@ -21,18 +21,51 @@
 	<div id="head">
 		<img src="{{ url_for('static', filename='images/logo.jpg') }}" height="100px" width="120px">
 		<cite>Banana Jun may be late, but will never be absent</cite>
-		<ul class="tag">
-			<li class="tag" ><a class="a_custom" id="yunwei" onclick="tag_status_change()">运维(1)</a></li>
-			<li class="tag" id="linx_c"><a class="a_custom" href="">linux c(0)</a></li>
+		<ul class="inline_element">
+			<li class="inline_element tag" ><span class="a_custom" id="yunwei" onclick="tag_status_change(event)">运维(1)</a></li>
+			<li class="inline_element tag" ><span class="a_custom" id="linux_c" onclick="tag_status_change(event)">linux c(0)</a></li>
+			<li class="inline_element tag" ><span class="a_custom" id="vim" onclick="tag_status_change(event)">vim(0)</a></li>
 		</ul>
 	</div>
-	<div>body</div>
+
+	<div id="myDiv">
+		{% block content%}
+		{% endblock %}
+	</div>
 </body>
 </html>
 
+
 <script>
 	function tag_status_change(event){
-		console.log(111);
-		console.log(this.id);
+
+		//干掉其他的边框
+		var allTag=document.getElementsByClassName("a_custom");
+		for (i=0;i<allTag.length;i++){
+			if (allTag[i].id!=event.target.id){
+				allTag[i].style.border="none";
+			}
+		}
+
+		//把边框加入当前元素
+		var tag_id = event.target.id;
+		document.getElementById(tag_id).style.border="solid";
+		
+		//ajax拉请求
+		
+		var ajax=new XMLHttpRequest();
+		var reqUrl="http://www.liwenjing.我爱你/blog/"+tag_id
+		var data={"tag_id":tag_id}
+		ajax.open("POST",reqUrl,true)
+		ajax.setRequestHeader("Content-type","application/json");	
+		ajax.send(JSON.stringify(data));
+		ajax.onreadystatechange = function(){
+			if ( ajax.readyState == 4 && ajax.status == 200 ) {
+				document.getElementById("myDiv").innerHTML=ajax.responseText;
+			} else {
+				;
+			}
+		};
+
 	}
 </script>
