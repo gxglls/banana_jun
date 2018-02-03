@@ -3,13 +3,20 @@
 <head>
 	<meta charset="UTF-8">
 	<title>框架</title>
+	<link href="{{ url_for('static', filename='common/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
+	<script src="{{ url_for('static', filename='common/jquery-3.3.1.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='common/bootstrap/js/bootstrap.js') }}"></script>
 
 	<style>
 		#head {
 			border-bottom-style: solid;		
+			padding:0px;
 		}	
 		.inline_element {
 			display: inline;
+			vertical-align: bottom;	
+			line-height:normal;
+
 		}
 		.a_custom {
 			text-decoration: none;
@@ -20,12 +27,14 @@
 <body>
 	<div id="head">
 		<img src="{{ url_for('static', filename='images/logo.jpg') }}" height="100px" width="120px">
-		<cite>Banana Jun may be late, but will never be absent</cite>
+		<span class="inline_element">Banana Jun may be late, but will never be absent</span>
+
 		<ul class="inline_element">
-			<li class="inline_element tag" ><span class="a_custom" id="yunwei" onclick="tag_status_change(event)">运维(1)</a></li>
-			<li class="inline_element tag" ><span class="a_custom" id="linux_c" onclick="tag_status_change(event)">linux c(0)</a></li>
-			<li class="inline_element tag" ><span class="a_custom" id="vim" onclick="tag_status_change(event)">vim(0)</a></li>
-		</ul>
+			<li class="inline_element tag" ><span class="inline_element a_custom" id="yunwei" onclick="tag_status_change(event)">运维(1)</a></li>
+			<li class="inline_element tag" ><span class="inline_element a_custom" id="linux_c" onclick="tag_status_change(event)">linux c(0)</a></li>
+			<li class="inline_element tag" ><span class="inline_element a_custom" id="vim" onclick="tag_status_change(event)">vim(0)</a></li>
+		</ul> 
+
 	</div>
 
 	<div id="myDiv">
