@@ -1,40 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-			<meta charset="UTF-8">
-				<title>Document</title>
-	</head>
-	<body>
-<h1 class>一步一步把vim打造成IDE</h1>
+<div class="wenbenkuai">
+<h1 class="text-center">用vim取代IDE的正确姿势</h1>
 
 <p>vim高度的可扩展性，使其能通过插件和配置文件的相互组合，实现IDE的诸多功能：如代码补全，函数定义跳转，文件目录树，源码的结构化浏览等。
-本文将从零开始一步一步把vim打造成一个精简版IDE，旨在提高linux下的开发效率以及日常运维效率，同时也想和其他的vim老司机们交流vim使用经验。</p>
+本文将从零开始一步一步把vim打造成一个精简版IDE，有助于提高linux下的开发效率以及日常运维效率</p>
 
-<p>若你按本文一步一步配置，将达到的最终效果如下(以python开发为例)
-<strong>代码编辑视图：</strong>
-<img alt="最终效果" title="最终效果" src=" {{ url_for('static', filename='images/vim_to_ide/最终效果1.png') }} "/></p>
+<p>若你按本文一步一步配置，将达到的最终效果如下(以python开发为例)</p>
+<strong>代码编辑视图：</strong><br>
+<center><img src=" {{ url_for('static', filename='images/vim_to_ide/最终效果1.png') }} " height="500px" width="900px"/></center>
 <p>我把该视图的30秒演示视频放到了b站方便展示:   https://www.bilibili.com/video/av17176370/</p>
 
 <p><strong>调试视图:</strong>
-<img alt="调试" title="调试" src="{{ url_for('static', filename='images/vim_to_ide/调试.png') }}"/></p>
+<center><img src=" {{ url_for('static', filename='images/vim_to_ide/调试.png') }} " height="500px" width="900px"/></center>
 
 <p>把一个官方标配的vim打造成如上效果，预计花费时间：2~3小时。
-本文尽可能让读者能理解每一行配置的含义，以便在出错或者需要个性化定制时自行修改。
-依赖：操作系统：debian8.(macOS,其他linux发行版均适用)，vim版本 &gt;= 7.3.584</p>
+本文尽可能让读者能理解每一行配置的含义，以便在出错或者需要个性化定制时自行修改。</p>
+
+<p><kbd>依赖</kbd></p>
+<ul>
+	<li>操作系统：debian8.(macOS,其他linux发行版均适用)</li>
+	<li>vim版本 &gt;= 7.3.584</li>
+</ul>
 
 <h2>step 0:安装准备</h2>
 <p>1.确定当前系统中的vim是否支持python语言特性(这是自动补全的基础)</p>
 
-<p><code>vim --version</code></p>
-	<p>
-	<img alt="vim_python支持" src="{{ url_for('static', filename='images/vim_to_ide/vim_python支持.png') }}"/>
+<pre>vim --version</pre>
+<center><img width=30% height=30% src=" {{ url_for('static', filename='images/vim_to_ide/vim_python支持.png') }} "/></center>
+<p>
 	如图，若python或python3前的符号为&quot;+&quot;,则表示当前vim支持python语言特性,可直接跳到下一步.
 	若为&quot;-&quot;,则需重新编译安装vim以支持python。不用担心，vim的编译安装过程很友好：(以py2为例，py3同理)
-	首先卸载系统自带vim：
-	apt-get remove vim
-	接着安装编译vim时所需依赖：</p>
-
-
-	</body>
-</html>
-
+	首先卸载系统自带vim：</p>
+	<pre>apt-get remove --purge vim</pre>
+	<p>接着安装编译vim时所需依赖：</p>
+<div>
