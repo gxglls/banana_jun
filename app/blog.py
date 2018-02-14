@@ -1,4 +1,22 @@
 from flask import Flask,render_template,request
+import MySQLdb
+import json
+import sys
+
+#utf-8
+reload(sys)    
+sys.setdefaultencoding('utf8')
+
+#import dependent
+sys.path.append("/root/my_flask/app/api/")
+
+#db init
+blogDB = MySQLdb.connect("localhost","root","toor","blog")
+cursor = blogDB.cursor()
+cursor.execute('SET NAMES UTF8')
+
+
+from db import *
 
 app = Flask(__name__)
 app.config.from_envvar("BLOG_SETTING")
@@ -11,20 +29,16 @@ def hello():
 def front_page():
     return render_template("frame.html")
 
-@app.route("/blog/yunwei",methods=['POST','GET'])
-def tag_yunwei():
-    print request.get_json()
-    return render_template("tag_yunwei.html")
+@app.route("/blog/tag",methods=['POST','GET'])
+def tag_dispaly():
+    tag=request.get_json()['tag_id']
+    article_list=get_article_list_by_tag(cursor,tag)
+    return render_template("catelogue/article_list_yunwei.html",article_list=article_list)
 
-@app.route("/blog/linux_c",methods=['POST','GET'])
-def tag_linux_c():
-    tagType="linux_c"
-    return render_template("tag_linux_c.html")
-
-@app.route("/blog/vim",methods=['POST','GET'])
-def tag_vim():
-    tagType="vim"
-    return render_template("tag_vim.html")
+@app.route("/blog/article",methods=['POST','GET'])
+def show_article():
+    article_name=request.get_json()['article_name']
+    return render_template("article/"+article_name+".html")
 
 @app.route("/test",methods=['POST','GET'])
 def test():
@@ -32,4 +46,4 @@ def test():
     return render_template("test.html",req=req)
 
 if __name__=='__main__':
-    app.run(host='0.0.0.0')
+    app.run(debug=True,host='0.0.0.0')
