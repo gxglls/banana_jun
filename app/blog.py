@@ -40,6 +40,12 @@ def show_article():
     article_name=request.get_json()['article_name']
     return render_template("article/"+article_name+".html")
 
+@app.route("/blog/comment",methods=['POST','GET'])
+def show_comment():
+    titleEn=request.get_json()['title_en']
+    commentList=get_comment_list_by_title_en(cursor,titleEn)
+    return render_template("comment/comment_"+titleEn+".html",commentList=commentList)
+
 @app.route("/test",methods=['POST','GET'])
 def test():
     req=request.headers
