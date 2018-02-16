@@ -60,7 +60,8 @@ function show_comment(title_en){
 	ajax.send(JSON.stringify(data));
 	ajax.onreadystatechange = function(){
 		if ( ajax.readyState == 4 && ajax.status == 200 ) {
-			document.getElementById("comment_div").innerHTML=ajax.responseText;
+			//document.getElementById("comment_div").innerHTML=ajax.responseText;
+			document.write(ajax.responseText);
 		} else {
 			;
 		}
