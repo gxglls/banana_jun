@@ -31,20 +31,22 @@ def front_page():
 
 @app.route("/blog/tag",methods=['POST','GET'])
 def tag_dispaly():
-    tag=request.get_json()['tag_id']
-    article_list=get_article_list_by_tag(cursor,tag)
+    article_list=get_article_list_by_tag(cursor,request.args['tag_id'])
     return render_template("catelogue/article_list_yunwei.html",article_list=article_list)
 
 @app.route("/blog/article",methods=['POST','GET'])
-def show_article():
-    article_name=request.get_json()['article_name']
-    return render_template("article/"+article_name+".html")
+def article_control():
+    return render_template("article/"+request.args['article_name']+".html")
 
 @app.route("/blog/comment",methods=['POST','GET'])
-def show_comment():
-    titleEn=request.get_json()['title_en']
-    commentList=get_comment_list_by_title_en(cursor,titleEn)
-    return render_template("comment/comment_"+titleEn+".html",commentList=commentList)
+def comment_control():
+    print request.form
+    if request.method == "GET":
+        commentList=get_comment_list_by_title_en(cursor,request.args['title_en'])
+        return render_template("comment/comment_"+request.args['title_en']+".html",commentList=commentList)
+    if request.method == "POST":
+        insertResult=insert_comment_by_title_en(blogDB,cursor,request.form)
+        return render_template("article/"+request.form['titleEn']+".html")
 
 @app.route("/test",methods=['POST','GET'])
 def test():

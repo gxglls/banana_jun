@@ -15,3 +15,11 @@ def get_comment_list_by_title_en(cursor,titleEn):
     for i in data:
         result.append(i)
     return result
+
+def insert_comment_by_title_en(blogDB,cursor,fd):
+    print fd['comment']
+    print fd['username']
+    print fd['titleEn']
+    sql="insert into comment(content,clock,user,title_en) values('%s',%s,'%s','%s')" % (fd['comment'],"now()",fd['username'],fd['titleEn'])
+    cursor.execute(sql)
+    blogDB.commit()

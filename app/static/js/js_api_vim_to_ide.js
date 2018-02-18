@@ -15,30 +15,14 @@ function tag_status_change(event){
 	//ajax拉请求
 
 	var ajax=new XMLHttpRequest();
-	var reqUrl="http://www.liwenjing.我爱你/blog/tag?tag_id="+tag_id
-	//var data={"tag_id":tag_id}
-	ajax.open("GET",reqUrl,true)
-	//ajax.setRequestHeader("Content-type","application/json");
-	//ajax.send(JSON.stringify(data));
-	ajax.send()
+	var reqUrl="http://www.liwenjing.我爱你/blog/tag"
+	var data={"tag_id":tag_id}
+	ajax.open("POST",reqUrl,true)
+	ajax.setRequestHeader("Content-type","application/json");
+	ajax.send(JSON.stringify(data));
 	ajax.onreadystatechange = function(){
 		if ( ajax.readyState == 4 && ajax.status == 200 ) {
 			document.getElementById("myDiv").innerHTML=ajax.responseText;
-		} else {
-			;
-		}
-	};
-
-}
-function show_comment(title_en){
-	console.log("show_comment call");
-	var ajax=new XMLHttpRequest();
-	var reqUrl="http://www.liwenjing.我爱你/blog/comment?title_en="+title_en
-	ajax.open("GET",reqUrl,true)
-	ajax.send();
-	ajax.onreadystatechange = function(){
-		if ( ajax.readyState == 4 && ajax.status == 200 && document.getElementById("comment_div") ) {
-			document.getElementById("comment_div").innerHTML=ajax.responseText;
 		} else {
 			;
 		}
@@ -46,45 +30,42 @@ function show_comment(title_en){
 
 }
 function show_article(event){
-
+	//把边框加入当前元素
 	var article_name = event.target.id;
 
 	//ajax拉请求
 
 	var ajax=new XMLHttpRequest();
-	var reqUrl="http://www.liwenjing.我爱你/blog/article?article_name="+article_name
-	ajax.open("GET",reqUrl,true)
-	ajax.send();
+	var reqUrl="http://www.liwenjing.我爱你/blog/article"
+	var data={"article_name":article_name}
+	ajax.open("POST",reqUrl,true)
+	ajax.setRequestHeader("Content-type","application/json");
+	ajax.send(JSON.stringify(data));
 	ajax.onreadystatechange = function(){
 		if ( ajax.readyState == 4 && ajax.status == 200 ) {
 			document.getElementById("myDiv").innerHTML=ajax.responseText;
-			show_comment("vim_to_ide");
 		} else {
 			;
 		}
 	};
 
-
 } 
-function send_comment(formId,titleEn){
-
-	var form = document.getElementById(formId);
-
-	//ajax拉请求
-
-	var fd=new FormData(form);
+function show_comment(title_en){
+	console.log("show_comment call");
 	var ajax=new XMLHttpRequest();
 	var reqUrl="http://www.liwenjing.我爱你/blog/comment"
+	var data={"title_en":title_en}
 	ajax.open("POST",reqUrl,true)
-	ajax.send(fd);
+	ajax.setRequestHeader("Content-type","application/json");
+	ajax.send(JSON.stringify(data));
 	ajax.onreadystatechange = function(){
 		if ( ajax.readyState == 4 && ajax.status == 200 ) {
-			show_comment(titleEn);
-			return 0;
+			//document.getElementById("comment_div").innerHTML=ajax.responseText;
+			document.write(ajax.responseText);
 		} else {
 			;
 		}
 	};
 
-
-} 
+}
+show_comment("vim_to_ide")

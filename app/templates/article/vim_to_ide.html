@@ -38,6 +38,20 @@
 <h2 class="text-left">留言</h2>
 <hr class="horizontal">
 <div  id="comment_div">
-<script type="text/javascript">show_comment("vim_to_ide")</script>
+</div>
+<br>
+<br>
+
+<h3 class="text-left">我要评论</h3>
+<hr class="horizontal">
+<div>
+	<form action="/blog/comment" id="commentAdd" method="POST">
+	评论内容
+	<textarea cols=110 rows=8 name="comment" form="commentAdd"> </textarea> 
+		<p>用户名：</p><input type="text" name="username"><br>
+		<p>邮&nbsp&nbsp&nbsp箱：</p><input type="text" name="email"><br><br>
+		<input type="hidden" name="titleEn" value="vim_to_ide">
+		<button onclick="send_comment('commentAdd','vim_to_ide')" class="btn btn-primary">发表评论</button>
+	</form>
 </div>
 <div>
