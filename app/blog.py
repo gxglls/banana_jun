@@ -45,8 +45,10 @@ def comment_control():
         commentList=get_comment_list_by_title_en(cursor,request.args['title_en'])
         return render_template("comment/comment_"+request.args['title_en']+".html",commentList=commentList)
     if request.method == "POST":
-        insertResult=insert_comment_by_title_en(blogDB,cursor,request.form)
-        return render_template("article/"+request.form['titleEn']+".html")
+        if insert_comment_by_title_en(blogDB,cursor,request.form)==0:
+            return "success"
+        else:
+            return "db error"
 
 @app.route("/test",methods=['POST','GET'])
 def test():

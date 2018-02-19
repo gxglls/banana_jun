@@ -21,5 +21,11 @@ def insert_comment_by_title_en(blogDB,cursor,fd):
     print fd['username']
     print fd['titleEn']
     sql="insert into comment(content,clock,user,title_en) values('%s',%s,'%s','%s')" % (fd['comment'],"now()",fd['username'],fd['titleEn'])
-    cursor.execute(sql)
-    blogDB.commit()
+    print sql
+    try:
+        cursor.execute(sql)
+        blogDB.commit()
+        return 0
+    except Exception as e:
+        blogDB.rollback()
+        return e

@@ -34,15 +34,17 @@ function show_comment(title_en){
 	console.log("show_comment call");
 	var ajax=new XMLHttpRequest();
 	var reqUrl="http://www.liwenjing.我爱你/blog/comment?title_en="+title_en
-	ajax.open("GET",reqUrl,true)
+	ajax.open("GET",reqUrl,false)
 	ajax.send();
-	ajax.onreadystatechange = function(){
-		if ( ajax.readyState == 4 && ajax.status == 200 && document.getElementById("comment_div") ) {
-			document.getElementById("comment_div").innerHTML=ajax.responseText;
-		} else {
-			;
-		}
-	};
+	document.getElementById("comment_div").innerHTML=ajax.responseText;
+	console.log(document.documentElement.scrollHeight)
+//	ajax.onreadystatechange = function(){
+//		if ( ajax.readyState == 4 && ajax.status == 200 && document.getElementById("comment_div") ) {
+//			document.getElementById("comment_div").innerHTML=ajax.responseText;
+//		} else {
+//			;
+//		}
+//	};
 
 }
 function show_article(event){
@@ -53,16 +55,18 @@ function show_article(event){
 
 	var ajax=new XMLHttpRequest();
 	var reqUrl="http://www.liwenjing.我爱你/blog/article?article_name="+article_name
-	ajax.open("GET",reqUrl,true)
+	ajax.open("GET",reqUrl,false)
 	ajax.send();
-	ajax.onreadystatechange = function(){
-		if ( ajax.readyState == 4 && ajax.status == 200 ) {
-			document.getElementById("myDiv").innerHTML=ajax.responseText;
-			show_comment("vim_to_ide");
-		} else {
-			;
-		}
-	};
+	document.getElementById("myDiv").innerHTML=ajax.responseText;
+	show_comment("vim_to_ide");
+//	ajax.onreadystatechange = function(){
+//		if ( ajax.readyState == 4 && ajax.status == 200 ) {
+//			document.getElementById("myDiv").innerHTML=ajax.responseText;
+//			show_comment("vim_to_ide",false);
+//		} else {
+//			;
+//		}
+//	};
 
 
 } 
@@ -75,16 +79,14 @@ function send_comment(formId,titleEn){
 	var fd=new FormData(form);
 	var ajax=new XMLHttpRequest();
 	var reqUrl="http://www.liwenjing.我爱你/blog/comment"
-	ajax.open("POST",reqUrl,true)
+	ajax.open("POST",reqUrl,false)
 	ajax.send(fd);
-	ajax.onreadystatechange = function(){
-		if ( ajax.readyState == 4 && ajax.status == 200 ) {
-			show_comment(titleEn);
-			return 0;
-		} else {
-			;
-		}
-	};
-
+	show_comment("vim_to_ide")
+//	ajax.onreadystatechange = function(){
+//		if ( ajax.readyState == 4 && ajax.status == 200 ) {
+//		} else {
+//			;
+//		}
+//	};
 
 } 
