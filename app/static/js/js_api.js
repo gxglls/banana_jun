@@ -90,3 +90,6 @@ function send_comment(formId,titleEn){
 //	};
 
 } 
+function test(event){
+	console.log(event.target.scrollTop)
+}
