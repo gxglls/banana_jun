@@ -81,15 +81,36 @@ function send_comment(formId,titleEn){
 	var reqUrl="http://www.liwenjing.我爱你/blog/comment"
 	ajax.open("POST",reqUrl,false)
 	ajax.send(fd);
-	show_comment("vim_to_ide")
-//	ajax.onreadystatechange = function(){
-//		if ( ajax.readyState == 4 && ajax.status == 200 ) {
-//		} else {
-//			;
-//		}
-//	};
+	show_comment("vim_to_ide");
+	scroll_smoothY(document.getElementById("commentHead").offsetTop);
 
 } 
-function test(event){
-	console.log(event.target.scrollTop)
+function scroll_smoothY(top){
+	current_y=window.pageYOffset;
+	//平滑度调节
+	step=5;
+	scrollNum=Math.ceil((current_y-top)/step);
+	for(i=0;i<scrollNum;i++){
+		setTimeout("window.scrollTo(0,window.pageYOffset-step)",35);	
+	}
+
+}
+function praise(articleName){
+	var ajax=new XMLHttpRequest();
+	var reqUrl="http://www.liwenjing.我爱你/blog/praise"
+	ajax.open("POST",reqUrl,false)
+	var data={"articleName":articleName}
+	ajax.open("POST",reqUrl,true)
+	ajax.setRequestHeader("Content-type","application/json");
+	ajax.send(JSON.stringify(data));
+	ajax.onreadystatechange = function(){
+		if ( ajax.readyState == 4 && ajax.status == 200 ) {
+			console.log(ajax);
+		} else {
+			;
+		}
+	};
+}
+function test(){
+	console.log(window.pageYOffset)
 }

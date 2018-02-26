@@ -29,3 +29,23 @@ def insert_comment_by_title_en(blogDB,cursor,fd):
     except Exception as e:
         blogDB.rollback()
         return e
+
+def get_praise(cursor,titleEn):
+    sql="select praise from article where title_en='%s'" % titleEn
+    cursor.execute(sql)
+    data = cursor.fetchall() 
+    result=[]
+    for i in data:
+        result.append(i)
+    return result
+
+def set_praise(cursor,titleEn):
+    currentPraise=
+    sql="update article " % titleEn
+    cursor.execute(sql)
+    data = cursor.fetchall() 
+    result=[]
+    for i in data:
+        result.append(i)
+    return result
+
