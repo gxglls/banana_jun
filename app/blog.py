@@ -50,6 +50,17 @@ def comment_control():
         else:
             return "db error"
 
+@app.route("/blog/praise",methods=['POST','GET'])
+def praise_control():
+    print request.form
+    if request.method == "GET":
+        return get_praise_by_title_en(cursor,request.args['titleEn'])
+    if request.method == "POST":
+        if add_praise_by_title_en(blogDB,cursor,request.json['titleEn'])==0:
+            return "success"
+        else:
+            return "db error"
+
 @app.route("/test",methods=['POST','GET'])
 def test():
     req=request.headers

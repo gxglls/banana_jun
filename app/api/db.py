@@ -30,22 +30,19 @@ def insert_comment_by_title_en(blogDB,cursor,fd):
         blogDB.rollback()
         return e
 
-def get_praise(cursor,titleEn):
-    sql="select praise from article where title_en='%s'" % titleEn
-    cursor.execute(sql)
-    data = cursor.fetchall() 
-    result=[]
-    for i in data:
-        result.append(i)
-    return result
+def get_praise_by_title_en(cursor,titleEn):
+    sql="select praise from article where title_en=%s" % titleEn
+    praiseNum=cursor.execute(sql)
+    return praiseNum
 
-def set_praise(cursor,titleEn):
-    currentPraise=
-    sql="update article " % titleEn
-    cursor.execute(sql)
-    data = cursor.fetchall() 
-    result=[]
-    for i in data:
-        result.append(i)
-    return result
-
+def add_praise_by_title_en(blogDB,cursor,titleEn):
+    currentPraise=get_praise_by_title_en(titleEn)
+    addCurrentPraise=currentPraise+1
+    sql="update article set praise=%d where title_en=%s" % (addCurrentPraise,titleEn)
+    try:
+        cursor.execute(sql)
+        blogDB.commit()
+        return 0
+    except Exception as e:
+        blogDB.rollback()
+        return e
