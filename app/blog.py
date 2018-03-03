@@ -2,6 +2,11 @@ from flask import Flask,render_template,request
 import MySQLdb
 import json
 import sys
+import pdb
+
+#debug level
+import logging
+logging.basicConfig(level=logging.INFO)
 
 #utf-8
 reload(sys)    
@@ -9,6 +14,7 @@ sys.setdefaultencoding('utf8')
 
 #import dependent
 sys.path.append("/root/my_flask/app/api/")
+sys.path.append("/root/my_flask/app/")
 
 #db init
 blogDB = MySQLdb.connect("localhost","root","toor","blog")
@@ -52,14 +58,10 @@ def comment_control():
 
 @app.route("/blog/praise",methods=['POST','GET'])
 def praise_control():
-    print request.form
     if request.method == "GET":
-        return get_praise_by_title_en(cursor,request.args['titleEn'])
+        return str(get_praise_by_title_en(cursor,request.args['articleName']))
     if request.method == "POST":
-        if add_praise_by_title_en(blogDB,cursor,request.json['titleEn'])==0:
-            return "success"
-        else:
-            return "db error"
+        return str(add_praise_by_title_en(blogDB,cursor,request.json['titleEn'],request.headers['X-Real-Ip']))
 
 @app.route("/test",methods=['POST','GET'])
 def test():

@@ -1,3 +1,4 @@
+from blog import logging
 def get_article_list_by_tag(cursor,tag):
     sql="select title,title_en from article where type='%s'" % tag
     cursor.execute(sql)
@@ -31,18 +32,20 @@ def insert_comment_by_title_en(blogDB,cursor,fd):
         return e
 
 def get_praise_by_title_en(cursor,titleEn):
-    sql="select praise from article where title_en=%s" % titleEn
-    praiseNum=cursor.execute(sql)
-    return praiseNum
+    sql="select count(titleEn) from praise where titleEn='%s'" % titleEn
+    cursor.execute(sql)
+    return cursor.fetchone()[0]
 
-def add_praise_by_title_en(blogDB,cursor,titleEn):
-    currentPraise=get_praise_by_title_en(titleEn)
-    addCurrentPraise=currentPraise+1
-    sql="update article set praise=%d where title_en=%s" % (addCurrentPraise,titleEn)
-    try:
-        cursor.execute(sql)
-        blogDB.commit()
-        return 0
-    except Exception as e:
-        blogDB.rollback()
-        return e
+def add_praise_by_title_en(blogDB,cursor,titleEn,ip):
+    testSql="select '%s' from praise"
+    if cursor.execute(testSql)==0:
+        sql="insert into praise(ip,titleEn) values('%s','%s')" % (ip,titleEn)
+        try:
+            cursor.execute(sql)
+            blogDB.commit()
+            return get_praise_by_title_en(cursor,titleEn)
+        except Exception as e:
+            blogDB.rollback()
+            return e
+    else:
+        return "done"

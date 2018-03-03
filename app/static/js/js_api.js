@@ -57,6 +57,7 @@ function show_article(event){
 	ajax.send();
 	document.getElementById("myDiv").innerHTML=ajax.responseText;
 	show_comment("vim_to_ide");
+	show_article_praise("vim_to_ide");
 //	ajax.onreadystatechange = function(){
 //		if ( ajax.readyState == 4 && ajax.status == 200 ) {
 //			document.getElementById("myDiv").innerHTML=ajax.responseText;
@@ -93,22 +94,37 @@ function scroll_smoothY(top){
 	}
 
 }
+function show_article_praise(articleName){
+	var ajax=new XMLHttpRequest();
+	var reqUrl="http://www.liwenjing.我爱你/blog/praise?articleName="+articleName
+	ajax.open("GET",reqUrl,false)
+	ajax.send();
+        document.getElementById("currentPraise").innerHTML="|"+ajax.responseText
+}
 function add_article_praise(articleName){
-	alert(1)
-//	var ajax=new XMLHttpRequest();
-//	var reqUrl="http://www.liwenjing.我爱你/blog/praise"
-//	ajax.open("POST",reqUrl,false)
-//	var data={"titleEn":articleName}
-//	ajax.open("POST",reqUrl,true)
-//	ajax.setRequestHeader("Content-type","application/json");
-//	ajax.send(JSON.stringify(data));
-//	ajax.onreadystatechange = function(){
-//		if ( ajax.readyState == 4 && ajax.status == 200 ) {
-//			console.log(ajax);
-//		} else {
-//			;
-//		}
-//	};
+	var ajax=new XMLHttpRequest();
+//	var ipUrl="http://pv.sohu.com/cityjson?ie=utf-8"
+//	ajax.open("GET",ipUrl,false);
+//	ajax.send();
+//	console.log(ajax.responseText)
+
+	var reqUrl="http://www.liwenjing.我爱你/blog/praise"
+	ajax.open("POST",reqUrl,false)
+	var data={"titleEn":articleName}
+	ajax.open("POST",reqUrl,true)
+	ajax.setRequestHeader("Content-type","application/json");
+	ajax.send(JSON.stringify(data));
+	ajax.onreadystatechange = function(){
+		if ( ajax.readyState == 4 && ajax.status == 200 ) {
+			if ( ajax.responseText=="done" ){
+				alert("已经点过赞啦   ^_^");
+			}else{
+				document.getElementById("currentPraise").innerHTML="|"+ajax.responseText
+			}
+		} else {
+			;
+		}
+	};
 }
 function test(){
 	console.log(window.pageYOffset)
