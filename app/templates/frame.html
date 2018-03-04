@@ -10,7 +10,7 @@
 
 	<style>
 		#head {
-			border-bottom-style: solid;		
+			/*border-bottom-style: solid;		*/
 			padding:0px;
 		}	
 		.inline_element {
@@ -40,19 +40,49 @@
 		.praiseBtn{
 			margin-left:500px;
 		}
+		.articleListTile{
+			margin-bottom:0px;
+		}
+		.articleListSubTile{
+			margin-top:0px;
+		}
+		.articleListType{
+			margin-left:60px;
+		}
+		.articleListTypeAll{
+			color: #669999;
+		}
+		.myNav{
+			margin-top:62.5px;
+		}
 	</style>
 
 </head>
 <body>
-	<div id="head">
-		<img src="{{ url_for('static', filename='images/logo.jpg') }}" height="100px" width="120px">
-		<span class="inline_element">Banana Jun may be late, but will never be absent</span>
+	<div id="head" class="raw">
+		<div class="col-md-4">
+			<img src="{{ url_for('static', filename='images/logo.jpg') }}" height="100px" width="120px">
+			<span class="inline_element">Banana Jun may be late, but will never be absent</span>
+		</div>
 
-		<ul class="inline_element">
-			<li class="inline_element tag" ><span class="inline_element a_custom" id="yunwei" onclick="tag_status_change(event)">运维(1)</a></li>
-			<li class="inline_element tag" ><span class="inline_element a_custom" id="linux_c" onclick="tag_status_change(event)">linux c(0)</a></li>
-			<li class="inline_element tag" ><span class="inline_element a_custom" id="vim" onclick="tag_status_change(event)">vim(0)</a></li>
+		<div class="col-md-5 myNav">
+			<ul class="nav nav-pills inline_element">
+				<li  id="DevOpsLi" onclick="tag_status_change(event)" role="presentation" class="active inline_element frontLi"><a id="DevOps" class="inline_element">运维(1)</a></li>
+				<li id="linux_cLi" onclick="tag_status_change(event)" role="presentation" class="inline_element frontLi"><a id="linux_c" class="inline_element">linux c(0)</a></li>
+				<li id="vimLi" onclick="tag_status_change(event)" role="presentation" class="inline_element frontLi"><a id="vim" class="inline_element">vim(0)</a></li>
+			</ul>
+		</div>
+		<div class="col-md-2"></div>
+
+
+		<!--	
+	        <ul class="inline_element">
+			<li class="inline_element tag" ><span class="inline_element a_custom" id="recent" onclick="tag_status_change(event)"></span></li>
+			<li class="inline_element tag" ><span class="inline_element a_custom" id="DevOps" onclick="tag_status_change(event)">运维(1)</span></li>
+			<li class="inline_element tag" ><span class="inline_element a_custom" id="linux_c" onclick="tag_status_change(event)">linux c(0)</span></li>
+			<li class="inline_element tag" ><span class="inline_element a_custom" id="vim" onclick="tag_status_change(event)">vim(0)</span></li>
 		</ul> 
+		-->
 
 	</div>
 

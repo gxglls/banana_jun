@@ -1,3 +1,13 @@
 {%  for article in article_list %}
-<a><h2 id={{article[1]}} onclick="show_article(event)">{{article[0]}}<h2></a>
+<div class="row">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
+		<a><h2 class="articleListTile" id={{article[1]}} onclick="show_article(event)">{{article[0]}}</h2></a><br>
+		<h5 class="articleListSubTile">{{article[2]}}</h5>
+		<span class="glyphicon glyphicon-list-alt articleListTypeAll">&nbsp;{{article[3]}}</span>
+		<span class="glyphicon glyphicon-tag articleListType articleListTypeAll">&nbsp;{{article[4]}}</span>
+		<HR style="FILTER: alpha(opacity=0,finishopacity=100,style=1)" width="80%" color=#987cb9 SIZE=3>
+	</div>
+	<div class="col-md-4"></div>
+</div>
 {% endfor %}

@@ -1,6 +1,6 @@
 from blog import logging
 def get_article_list_by_tag(cursor,tag):
-    sql="select title,title_en from article where type='%s'" % tag
+    sql="select title,title_en,summarize,clock,type from article where type='%s'" % tag
     cursor.execute(sql)
     data = cursor.fetchall() 
     result=[]

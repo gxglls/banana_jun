@@ -1,16 +1,18 @@
 function tag_status_change(event){
 
+	var tag_id = event.target.id
+
 	//干掉其他的边框
-	var allTag=document.getElementsByClassName("a_custom");
+	var allTag=document.getElementsByClassName("frontLi");
 	for (i=0;i<allTag.length;i++){
-		if (allTag[i].id!=event.target.id){
-			allTag[i].style.border="none";
+		if (allTag[i].id!=(tag_id+"Li")){
+			allTag[i].className="inline_element frontLi";
+		}
+		else{
+			allTag[i].className="active inline_element frontLi"
 		}
 	}
 
-	//把边框加入当前元素
-	var tag_id = event.target.id;
-	document.getElementById(tag_id).style.border="solid";
 
 	//ajax拉请求
 
@@ -99,7 +101,7 @@ function show_article_praise(articleName){
 	var reqUrl="http://www.liwenjing.我爱你/blog/praise?articleName="+articleName
 	ajax.open("GET",reqUrl,false)
 	ajax.send();
-        document.getElementById("currentPraise").innerHTML="|"+ajax.responseText
+        document.getElementById("currentPraise").innerHTML="&nbsp;&nbsp;"+ajax.responseText+"&nbsp;"
 }
 function add_article_praise(articleName){
 	var ajax=new XMLHttpRequest();
@@ -119,7 +121,7 @@ function add_article_praise(articleName){
 			if ( ajax.responseText=="done" ){
 				alert("已经点过赞啦   ^_^");
 			}else{
-				document.getElementById("currentPraise").innerHTML="|"+ajax.responseText
+				document.getElementById("currentPraise").innerHTML="&nbsp;&nbsp;"+ajax.responseText+"&nbsp;"
 			}
 		} else {
 			;
