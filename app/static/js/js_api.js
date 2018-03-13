@@ -1,18 +1,17 @@
 function tag_status_change(event){
-
-	var tag_id = event.target.id
-
-	//干掉其他的边框
-	var allTag=document.getElementsByClassName("frontLi");
-	for (i=0;i<allTag.length;i++){
-		if (allTag[i].id!=(tag_id+"Li")){
-			allTag[i].className="inline_element frontLi";
-		}
-		else{
-			allTag[i].className="active inline_element frontLi"
-		}
-	}
-
+        var tag_id = event.target.id
+ 
+         //干掉其他的边框
+      //  var allTag=document.getElementsByClassName("a_custom");
+      //   for (i=0;i<allTag.length;i++){
+      //          if (allTag[i].id!=event.target.id){
+      //                  allTag[i].style.border="none";
+      //           }
+      //   }
+  
+      //  //把边框加入当前元素
+      //  document.getElementById(tag_id).style.border="solid";
+      //  console.log(document.getElementById(tag_id));
 
 	//ajax拉请求
 

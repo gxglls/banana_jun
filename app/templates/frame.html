@@ -10,7 +10,8 @@
 
 	<style>
 		#head {
-			/*border-bottom-style: solid;		*/
+			border-bottom-style: solid;
+			border-bottom-color: #ccc;
 			padding:0px;
 		}	
 		.inline_element {
@@ -20,6 +21,11 @@
 		}
 		.a_custom {
 			text-decoration: none;
+			font-weight:bold;	
+			font-style:oblique;
+		}
+		.babana {
+			font-family: "Lucida Console";
 		}
 		.wenbenkuai{
 			padding:0px 100px 0px 100px;
@@ -60,11 +66,9 @@
 </head>
 <body>
 	<div id="head" class="raw">
-		<div class="col-md-4">
 			<img src="{{ url_for('static', filename='images/logo.jpg') }}" height="100px" width="120px">
-			<span class="inline_element">Banana Jun may be late, but will never be absent</span>
-		</div>
-
+			<span class="inline_element banana">Banana Jun may be late, but will never be absent</span>
+		<!--
 		<div class="col-md-5 myNav">
 			<ul class="nav nav-pills inline_element">
 				<li  id="DevOpsLi" onclick="tag_status_change(event)" role="presentation" class="active inline_element frontLi"><a id="DevOps" class="inline_element">运维(1)</a></li>
@@ -74,15 +78,12 @@
 		</div>
 		<div class="col-md-2"></div>
 
-
-		<!--	
-	        <ul class="inline_element">
-			<li class="inline_element tag" ><span class="inline_element a_custom" id="recent" onclick="tag_status_change(event)"></span></li>
-			<li class="inline_element tag" ><span class="inline_element a_custom" id="DevOps" onclick="tag_status_change(event)">运维(1)</span></li>
-			<li class="inline_element tag" ><span class="inline_element a_custom" id="linux_c" onclick="tag_status_change(event)">linux c(0)</span></li>
-			<li class="inline_element tag" ><span class="inline_element a_custom" id="vim" onclick="tag_status_change(event)">vim(0)</span></li>
-		</ul> 
 		-->
+	        <ul class="inline_element">
+			<li class="inline_element tag" ><button class="btn btn-default inline_element a_custom" id="DevOps" onclick="tag_status_change(event)">DevOps(1)</button></li>
+			<li class="inline_element tag" ><button class="btn btn-default inline_element a_custom" id="linux_c" onclick="tag_status_change(event)">Linux C(0)</button></li>
+			<li class="inline_element tag" ><button class="btn btn-default inline_element a_custom" id="vim" onclick="tag_status_change(event)">Vim(0)</li>
+		</ul> 
 
 	</div>
 
